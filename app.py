@@ -50,15 +50,14 @@ st.markdown("""
 # Title
 st.markdown('<h1 class="main-header">🏠 House Price Prediction System</h1>', unsafe_allow_html=True)
 
-# Sample data (converted to rupees)
+# Sample data (unchanged values, just rupee symbol)
 @st.cache_data
 def load_data():
-    # Converted from dollars to rupees (approx 1 USD = 83 INR)
     data = {
         'Area': [2600, 2800, 3000, 3200, 3400, 4000, 4200, 4300, 4400, 4500],
         'Bedrooms': [2, 2, 3, 3, 3, 4, 3, 3, 4, 4],
         'Age': [10, 12, 14, 15, 18, 15, 14, 16, 18, 20],
-        'Price': [41500000, 45650000, 49800000, 51460000, 54780000, 58100000, 62250000, 63910000, 65570000, 67230000]
+        'Price': [500000, 550000, 600000, 620000, 660000, 700000, 750000, 770000, 790000, 810000]
     }
     return pd.DataFrame(data)
 
@@ -126,9 +125,9 @@ with col1:
     
     st.info("""
     **Model Interpretation:**
-    - Each additional sq ft increases price by ₹11,000
-    - Each additional bedroom decreases price by ₹9,67,000 (holding area constant)
-    - Each additional year of age increases price by ₹6,28,000
+    - Each additional sq ft increases price by ₹133
+    - Each additional bedroom decreases price by ₹11,674 (holding area constant)
+    - Each additional year of age increases price by ₹7,581
     """)
 
 with col2:
