@@ -319,7 +319,7 @@
                 
                 <div id="result" class="result" style="display: none;">
                     <h3>Predicted Price</h3>
-                    <div class="price-display" id="predicted-price">$0</div>
+                    <div class="price-display" id="predicted-price">₹0</div>
                     <p>Based on your input parameters</p>
                 </div>
             </div>
@@ -335,15 +335,15 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
                         <div>
                             <h4>📏 Area Coefficient</h4>
-                            <p>$133 per sq ft</p>
+                            <p>₹11,000 per sq ft</p>
                         </div>
                         <div>
                             <h4>🛏️ Bedroom Impact</h4>
-                            <p>-$11,674 per bedroom</p>
+                            <p>-₹9,67,000 per bedroom</p>
                         </div>
                         <div>
                             <h4>📅 Age Factor</h4>
-                            <p>+$7,581 per year</p>
+                            <p>+₹6,28,000 per year</p>
                         </div>
                         <div>
                             <h4>🎯 Model Accuracy</h4>
@@ -363,11 +363,11 @@
     </footer>
 
     <script>
-        // Model coefficients from your trained model
-        const AREA_COEF = 132.75324675;
-        const BEDROOMS_COEF = -11673.88167388;
-        const AGE_COEF = 7580.66378066;
-        const INTERCEPT = 112741.12554112577;
+        // Model coefficients converted to rupees (approx conversion rate: 1 USD = 83 INR)
+        const AREA_COEF = 132.75324675 * 83; // ₹11,000 per sq ft
+        const BEDROOMS_COEF = -11673.88167388 * 83; // -₹9,67,000 per bedroom
+        const AGE_COEF = 7580.66378066 * 83; // +₹6,28,000 per year
+        const INTERCEPT = 112741.12554112577 * 83; // Base price in rupees
 
         function predictPrice(event) {
             event.preventDefault();
@@ -387,7 +387,7 @@
             const resultDiv = document.getElementById('result');
             const priceDisplay = document.getElementById('predicted-price');
             
-            priceDisplay.textContent = `$${Math.round(prediction).toLocaleString()}`;
+            priceDisplay.textContent = `₹${Math.round(prediction).toLocaleString('en-IN')}`;
             resultDiv.style.display = 'block';
             
             // Smooth scroll to result
