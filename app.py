@@ -50,14 +50,15 @@ st.markdown("""
 # Title
 st.markdown('<h1 class="main-header">🏠 House Price Prediction System</h1>', unsafe_allow_html=True)
 
-# Sample data (from your notebook)
+# Sample data (converted to rupees)
 @st.cache_data
 def load_data():
+    # Converted from dollars to rupees (approx 1 USD = 83 INR)
     data = {
         'Area': [2600, 2800, 3000, 3200, 3400, 4000, 4200, 4300, 4400, 4500],
         'Bedrooms': [2, 2, 3, 3, 3, 4, 3, 3, 4, 4],
         'Age': [10, 12, 14, 15, 18, 15, 14, 16, 18, 20],
-        'Price': [500000, 550000, 600000, 620000, 660000, 700000, 750000, 770000, 790000, 810000]
+        'Price': [41500000, 45650000, 49800000, 51460000, 54780000, 58100000, 62250000, 63910000, 65570000, 67230000]
     }
     return pd.DataFrame(data)
 
@@ -118,16 +119,16 @@ with col1:
     intercept = model.intercept_
     
     st.write("**Model Coefficients:**")
-    st.write(f"- Area coefficient: {coeffs[0]:.2f}")
-    st.write(f"- Bedrooms coefficient: {coeffs[1]:.2f}")
-    st.write(f"- Age coefficient: {coeffs[2]:.2f}")
-    st.write(f"- Intercept: {intercept:.2f}")
+    st.write(f"- Area coefficient: ₹{coeffs[0]:.2f}")
+    st.write(f"- Bedrooms coefficient: ₹{coeffs[1]:.2f}")
+    st.write(f"- Age coefficient: ₹{coeffs[2]:.2f}")
+    st.write(f"- Intercept: ₹{intercept:.2f}")
     
     st.info("""
     **Model Interpretation:**
-    - Each additional sq ft increases price by $133
-    - Each additional bedroom decreases price by $11,674 (holding area constant)
-    - Each additional year of age increases price by $7,581
+    - Each additional sq ft increases price by ₹11,000
+    - Each additional bedroom decreases price by ₹9,67,000 (holding area constant)
+    - Each additional year of age increases price by ₹6,28,000
     """)
 
 with col2:
@@ -139,7 +140,7 @@ with col2:
     # Display prediction in a styled container
     st.markdown(f'''
     <div class="prediction-result">
-        Predicted Price: ${prediction:,.0f}
+        Predicted Price: ₹{prediction:,.0f}
     </div>
     ''', unsafe_allow_html=True)
     
@@ -173,7 +174,7 @@ with col2:
             mode='markers',
             marker=dict(size=15, color='red', symbol='star'),
             name='Your Prediction',
-            hovertext=f'Predicted: ${prediction:,.0f}'
+            hovertext=f'Predicted: ₹{prediction:,.0f}'
         )
     )
     
@@ -185,10 +186,10 @@ st.markdown('<h2 class="sub-header">📋 Additional Insights</h2>', unsafe_allow
 col3, col4, col5 = st.columns(3)
 
 with col3:
-    st.metric("Average Price", f"${df['Price'].mean():,.0f}")
+    st.metric("Average Price", f"₹{df['Price'].mean():,.0f}")
     
 with col4:
-    st.metric("Price Range", f"${df['Price'].min():,.0f} - ${df['Price'].max():,.0f}")
+    st.metric("Price Range", f"₹{df['Price'].min():,.0f} - ₹{df['Price'].max():,.0f}")
     
 with col5:
     r2_score = model.score(df[['Area', 'Bedrooms', 'Age']], df['Price'])
